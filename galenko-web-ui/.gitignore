@@ -2,5 +2,5 @@
 .idea/*
 target
 target/*
-galenko-web-ui.iml
+*.iml
 
