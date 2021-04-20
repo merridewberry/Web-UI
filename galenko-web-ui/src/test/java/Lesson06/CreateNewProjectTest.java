@@ -1,12 +1,18 @@
 package Lesson06;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.junit.jupiter.api.Test;
 import static Lesson06.Values.*;
 
-
+@Feature("Create new project")
+@Severity(SeverityLevel.CRITICAL)
 public class CreateNewProjectTest extends DriverTest {
 
     @Test
+    @Description("Positive new project creation test")
     public void createNewProjectPositiveTest() {
         new Login(driver).signIn(LOGIN, PASSWORD);
 
