@@ -1,5 +1,6 @@
 package Lesson06;
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,21 +29,25 @@ public class Login extends Driver {
         super(driver);
     }
 
+    @Step(value = "Enter login {login}")
     public Login enterLogin(String login) {
         inputLogin.sendKeys(login);
         return this;
     }
 
+    @Step(value = "Enter password {password}")
     public Login enterPassword(String password) {
         inputPassword.sendKeys(password);
         return this;
     }
 
+    @Step(value = "Click submit button")
     public Login clickSubmit() {
         submit.click();
         return this;
     }
 
+    @Step(value = "Check if login was successful")
     public void checkLoginTrue() {
         Assertions.assertTrue(mainMenu.isDisplayed());
     }
@@ -53,13 +58,15 @@ public class Login extends Driver {
         } catch (Exception e) {
             return false;
         }
-        return true;
+        return mainMenus.size() > 0;
     }
 
+    @Step(value = "Check if login was unsuccessful")
     public void checkLoginFalse() {
        Assertions.assertFalse(clickSubmitNegative());
     }
 
+    @Step(value = "Sign in with login \'{login}\' and password \'{password}\'")
     public void signIn(String login, String password) {
         inputLogin.sendKeys(login);
         inputPassword.sendKeys(password);

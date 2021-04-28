@@ -1,5 +1,6 @@
 package Lesson06;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -23,6 +24,7 @@ public class Menu extends Driver {
         super(driver, builder);
     }
 
+    @Step(value = "Click \'Contacts\' link in the \'Contractors\' dropdown menu")
     public CreateNewContact clickContacts () {
         builder
                 .moveToElement(contractors)
@@ -32,6 +34,7 @@ public class Menu extends Driver {
         return new CreateNewContact(driver);
     }
 
+    @Step(value = "Click \'My projects\' link in the \'Projects\' dropdown menu")
     public CreateNewProject clickMyProjects() {
         builder
                 .moveToElement(projects)

@@ -1,5 +1,6 @@
 package Lesson06;
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -62,16 +63,19 @@ public class CreateNewProject extends Driver{
         super(driver);
     }
 
+    @Step(value = "Click \'Create new project\' button")
     public CreateNewProject createNewProject() {
         createProjectButton.click();
         return this;
     }
 
+    @Step(value = "Enter project name {name}")
     public CreateNewProject inputProjectName(String name) {
         projectName.sendKeys(name);
         return this;
     }
 
+    @Step(value = "Select company {name}")
     public CreateNewProject chooseCompany(String name) {
         selectCompany.click();
         inputCompanyName.sendKeys(name);
@@ -79,6 +83,7 @@ public class CreateNewProject extends Driver{
         return this;
     }
 
+    @Step(value = "Select contact {name}")
     public CreateNewProject chooseContact(String name) {
         selectContact.click();
         inputContactName.get(1).sendKeys(name);
@@ -86,41 +91,48 @@ public class CreateNewProject extends Driver{
         return this;
     }
 
+    @Step(value = "Choose business unit {unit}")
     public CreateNewProject chooseBusinessUnit(String unit) {
         Select bUnit = new Select(businessUnit);
         bUnit.selectByValue(unit);
         return this;
     }
 
+    @Step(value = "Choose curator {name}")
     public CreateNewProject chooseCurator(String name) {
         Select cur = new Select(curator);
         cur.selectByVisibleText(name);
         return this;
     }
 
+    @Step(value = "Choose project lead {name}")
     public CreateNewProject chooseRP(String name) {
         Select lead = new Select(rp);
         lead.selectByVisibleText(name);
         return this;
     }
 
+    @Step(value = "OH GOD WILL IT EVER END")
     public CreateNewProject chooseAdministrator(String name) {
         Select admin = new Select(administrator);
         admin.selectByVisibleText(name);
         return this;
     }
 
+    @Step(value = "Choose manager {name}")
     public CreateNewProject chooseManager(String name) {
         Select man = new Select(manager);
         man.selectByVisibleText(name);
         return this;
     }
 
+    @Step(value = "Click submit button")
     public CreateNewProject submitNewProject() {
         submitButton.click();
         return this;
     }
 
+    @Step(value = "Check if creation of new project was successful")
     public void checkSuccess() {
         Assertions.assertTrue(message.isDisplayed());
     }

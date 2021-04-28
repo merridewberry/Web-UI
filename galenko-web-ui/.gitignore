@@ -3,4 +3,6 @@
 target
 target/*
 *.iml
+allure-results
+allure-results/*
 

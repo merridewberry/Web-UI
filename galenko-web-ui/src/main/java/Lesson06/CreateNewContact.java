@@ -1,7 +1,7 @@
 package Lesson06;
 
+import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,21 +41,25 @@ public class CreateNewContact extends Driver {
         super(driver);
     }
 
+    @Step(value = "Click on \'Create new contact\' button")
     public CreateNewContact createNewContact() {
         createNewContactButton.click();
         return this;
     }
 
+    @Step(value = "Enter last name {name}")
     public CreateNewContact inputLastName(String name) {
         lastName.sendKeys(name);
         return this;
     }
 
+    @Step(value = "Enter first name {name}")
     public CreateNewContact inputFirstName(String name) {
         firstName.sendKeys(name);
         return this;
     }
 
+    @Step(value = "Select company name {companyName}")
     public CreateNewContact chooseCompany(String companyName) {
         selectCompany.click();
         inputCompanyName.sendKeys(companyName);
@@ -63,16 +67,19 @@ public class CreateNewContact extends Driver {
         return this;
     }
 
+    @Step(value = "Enter job title {job}")
     public CreateNewContact inputJobTitle(String job) {
         JobJTitle.sendKeys(job);
         return this;
     }
 
+    @Step(value = "Click submit button")
     public CreateNewContact submitNewContact() {
         submit.click();
         return this;
     }
 
+    @Step(value = "Check if creation of new contact was successful")
     public void checkSuccess() {
         Assertions.assertTrue(message.isDisplayed());
     }

@@ -9,9 +9,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.logging.LogEntries;
+import org.openqa.selenium.logging.LogEntry;
+import org.openqa.selenium.logging.LogType;
+
 import static Lesson06.Values.LOGIN_URL;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 public abstract class DriverTest {
 
@@ -39,8 +48,25 @@ public abstract class DriverTest {
     }
 
     @AfterEach
-    public void quit() {
+    public void quit() throws IOException {
+        LogEntries browserLogs = driver.manage().logs().get(LogType.BROWSER);
+        List<LogEntry> allLogRows = browserLogs.getAll();
+        if (allLogRows.size() > 0 ) {
+            writeLog(allLogRows);
+        }
         driver.quit();
     }
 
+    private void writeLog(List<LogEntry> allLogRows)  throws IOException  {
+        BufferedWriter writer = new BufferedWriter(new FileWriter("log.txt", true));
+        List<String> logMessages = allLogRows.stream()
+                .map(logRow -> logRow.getMessage())
+                .collect(Collectors.toList());
+        for (int i = 0; i < logMessages.size(); i++) {
+            writer.append(logMessages.get(i));
+            writer.append("\n");
+        }
+        writer.append("\n\n\n");
+        writer.close();
+    }
 }
